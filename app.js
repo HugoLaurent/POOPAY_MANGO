@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config(); // pour charger le .env
 
+require("./models/User");
+require("./models/Region");
+require("./models/EmploymentStatus");
+require("./models/Sector");
+require("./models/SalaryRange");
+require("./models/Subscription");
+require("./models/ToiletSession");
+require("./models/Group");
+require("./models/GroupMember");
+require("./models/Compte");
+
 const apiRoutes = require("./routes/apiRoutes");
 
 const app = express();
