@@ -7,6 +7,7 @@ const groupController = require("../controllers/groupController");
 
 // Utilisateurs
 router.get("/users", usersController.getAllUsers);
+router.get("/users/by-age", usersController.getUsersByAgeRange);
 
 // Sessions toilettes par user
 router.get(

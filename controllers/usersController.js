@@ -23,26 +23,31 @@ exports.getUsersByAgeRange = async (req, res) => {
     }
 
     const today = new Date();
-    const minBirth = new Date(
-      today.getFullYear() - max,
+    const minAge = parseInt(min); // exemple : 34
+    const maxAge = parseInt(max); // exemple : 56
+
+    // Exemple : minAge = 34 → né après 2025 - 34 = 1991
+    const dateMax = new Date(
+      today.getFullYear() - minAge,
       today.getMonth(),
       today.getDate()
     );
-    const maxBirth = new Date(
-      today.getFullYear() - min,
+    const dateMin = new Date(
+      today.getFullYear() - maxAge,
       today.getMonth(),
       today.getDate()
     );
 
     const users = await User.find({
       date_naissance: {
-        $gte: minBirth,
-        $lte: maxBirth,
+        $gte: dateMin, // né après cette date
+        $lte: dateMax, // né avant cette date
       },
-    }).populate("region statut_emploi secteur tranche_salaire abonnement");
+    });
 
     res.json(users);
   } catch (error) {
+    console.error("❌ Erreur getUsersByAgeRange:", error);
     res.status(500).json({ error: "Erreur lors de la recherche par âge." });
   }
 };
