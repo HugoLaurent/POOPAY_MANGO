@@ -14,6 +14,21 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+exports.getUserByPseudo = async (req, res) => {
+  try {
+    const user = await User.findOne({ pseudo: req.params.pseudo });
+
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error("❌ Erreur getUserByPseudo:", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
 exports.getUsersByAgeRange = async (req, res) => {
   try {
     const { min, max } = req.query;

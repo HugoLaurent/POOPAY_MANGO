@@ -10,12 +10,9 @@ router.get("/users", usersController.getAllUsers);
 router.get("/users/by-age", usersController.getUsersByAgeRange);
 
 // Sessions toilettes par user
-router.get(
-  "/users/:userId/sessions",
-  toiletSessionController.getSessionsByUser
-);
+router.get("/users/by-pseudo/:pseudo", usersController.getUserByPseudo);
 
 // Groupes d’amis par user
-router.get("/users/:userId/groups", groupController.getGroupsByUser);
+router.get("/users/groups", groupController.getGroupsByUserPseudo);
 
 module.exports = router;
